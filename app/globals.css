@@ -2,32 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base{
+  html,
+  body {
+    overflow: hidden;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  body{
+    @apply text-white bg-primary
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .sidebarTitle {
+    @apply font-semibold text-[18px]
+  }
+
+  .sidebarLink {
+    @apply text-textcolor ml-4 cursor-pointer hover:text-white transition w-fit;
+  }
+
+  .sidebarActive {
+    @apply text-white
+  }
+
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .cardSkeleton {
+    background-image: linear-gradient(
+      90deg,
+      #090b0e 0px,
+      #3d3d3d 60px,
+      #090b0e 120px
+    );
+    animation: shine 0.7s linear infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 0px;
+    }
+    100% {
+      background-position: 220px;
+    }
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
   }
 }
